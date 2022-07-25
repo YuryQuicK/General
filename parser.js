@@ -22,10 +22,9 @@ const urlArr = []
 // const delay = 1 * sec
 
 // части html кода
-const htmlFirstPart = '<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>Мониторинг температуры</title></head><body><table align="center" border="1" cellspacing="0" width="40%" style="text-align: center;"><tr><th>IP-адрес</th><th>Температура</th></tr><form action="getData" method="get">'
+const htmlFirstPart = '<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>Мониторинг температуры</title></head><body><table align="center" border="1" cellspacing="0" width="40%" style="text-align: center;"><tr><th>IP-адрес</th><th>Температура</th></tr><form id="form" action="/" method="get">'
 var htmlMiddlePart = ''
-const htmlLastPart = "</form></table></body></html>"
-//<script>let sec = 1000; let min = 60000; let delay = 1 * sec; setInterval(() => {console.log('setInterval')}, delay);</script>
+const htmlLastPart = "</form></table><script>let form = document.getElementById('form');form.submit();</script><script>let sec = 1000; let min = 60000; let delay = 5 * sec; let form = document.getElementById('form'); setInterval(() => {form.submit()}, delay);</script></body></html>"
 var html = ''
 
 // части строки ip и температуры
@@ -47,17 +46,21 @@ html = htmlFirstPart + htmlMiddlePart + htmlLastPart
 const app = express()
 
 app.get('/', (req, res) => {
+    // рендер тут!
     res.send(html)
 })
 
-// urlArr.forEach(url => {
-//     axios(url)
-//         .then(response => {
+// ни к чему ещё один запрос
+// app.get('getValue', (req, res) => {
+//     urlArr.forEach(url => {
+//         axios(url)
+//             .then(response => {
 //             const html = response.data
 //             console.log(html)
-//         })
+//             })
     
-// });
+//     });
+// })
 
 //const fd = fs.openSync('log.txt', 'w')
 
