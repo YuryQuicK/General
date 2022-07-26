@@ -1,5 +1,14 @@
-const sec = 1000;
-const min = 60000;
-const delay = 1 * sec;
+let dataCells = document.querySelectorAll('td');
 
-setInterval(() => console.log('setInterval'), delay);
+fetch('./getData')
+    .then(res => res.json())
+    .then(obj => {
+        let length = obj['length'];
+        for (let i = 0; i < length; i++) {
+            dataCells.forEach((cell, j) => {
+                if (j % 2 != 0) {
+                    cell.innerHTML = obj['value' + i.toString()];
+                }
+            });
+        }
+    });
